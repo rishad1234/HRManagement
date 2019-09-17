@@ -21,8 +21,11 @@ public class LoginController implements Initializable {
     
     @FXML
     private TextField email;
+    @FXML
     private TextField password;
+    @FXML
     private Button loginButton;
+    @FXML
     private Label errorLabel;
     
 //    @FXML
@@ -59,9 +62,7 @@ public class LoginController implements Initializable {
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                errorLabel.setText("checked");
-                email.setText("checked");
-                password.setText("checked");
+                
             }
         });
     }    
