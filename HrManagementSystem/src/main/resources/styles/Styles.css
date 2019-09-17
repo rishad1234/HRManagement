@@ -1,3 +1,20 @@
 .button {
     -fx-font-weight: bold;
 }
+
+#loginButton{
+        -fx-border: none;
+        -fx-text-align: center;
+        -fx-text-decoration: none;
+        -fx-display: inline-block;
+        -fx-font-weight: bold;
+}
+
+#loginButton:hover,  #loginButton:focused{
+        -fx-border: none;
+        -fx-text-align: center;
+        -fx-font-size: 20;
+        -fx-text-decoration: none;
+        -fx-display: inline-block;
+        -fx-font-weight: bold;
+}
