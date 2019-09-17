@@ -35,7 +35,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button id="loginButton" fx:id="loginButton" layoutX="420.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="167.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Login" textAlignment="CENTER" textFill="#212121" wrapText="true">
+      <Button id="loginButton" fx:id="loginButton" focusTraversable="false" layoutX="420.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="167.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Login" textAlignment="CENTER" textFill="#212121" wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
