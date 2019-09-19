@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import utils.AttributeHash;
 import utils.CleanStringAttribute;
@@ -24,7 +25,7 @@ public class LoginController implements Initializable {
     @FXML
     private TextField email;
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
     private Button loginButton;
     @FXML
