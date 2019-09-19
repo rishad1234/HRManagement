@@ -47,31 +47,7 @@ public class LoginController implements Initializable {
                     errorLabel.setText("");
                     userPassword = AttributeHash.hash(userPassword);
                     
-                    Connection connection = ConnectDB.makeConnection();
-                    
-                    // do the code here
-                    String sql = "select * from employees where email=? and password=?";
-                    
-                    try {
-                        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                        preparedStatement.setString(1, userEmail);
-                        preparedStatement.setString(2, userPassword);
-                        
-                        ResultSet data = preparedStatement.executeQuery();
-                        
-                        while (data.next()) { /* looping through the resultset */
-
-                            System.out.println(data.getString("first_name"));
-                            System.out.println(data.getString("last_name"));
-                            System.out.println(data.getString("designation"));
-                            System.out.println("");
-                        }
-                        
-                    } catch (Exception ex) {
-                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                    ConnectDB.close();
+                    checkLogin(userEmail, userPassword);
                     
                 }else if(!EmailValidator.emailValidate(userEmail)){
                     errorLabel.setText("Email is not in correct form");
@@ -83,5 +59,30 @@ public class LoginController implements Initializable {
                 }
             }
         });
-    }    
+    }
+
+    private void checkLogin(String userEmail, String userPassword){
+        Connection connection = ConnectDB.makeConnection();
+        // do the code here
+        String sql = "select * from employees where email=? and password=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, userEmail);
+            preparedStatement.setString(2, userPassword);
+
+            ResultSet data = preparedStatement.executeQuery();
+
+            while (data.next()) { /* looping through the resultset */
+                if(data.getString("email").equals(userEmail) &&
+                        data.getString("password").equals(userPassword) &&
+                        data.getString("designation").equals("Administrator")){
+                    System.out.println("login successful");
+                    break;
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnectDB.close();
+    }
 }
