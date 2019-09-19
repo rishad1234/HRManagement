@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,11 +11,15 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import utils.AttributeHash;
 import utils.CleanStringAttribute;
 import utils.ConnectDB;
@@ -77,6 +82,7 @@ public class LoginController implements Initializable {
                         data.getString("password").equals(userPassword) &&
                         data.getString("designation").equals("Administrator")){
                     System.out.println("login successful");
+                    gotoAdminPanel();
                     break;
                 }
             }
@@ -84,5 +90,15 @@ public class LoginController implements Initializable {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         ConnectDB.close();
+    }
+    
+    public void gotoAdminPanel() throws IOException {
+       Stage stage = ((Stage) email.getScene().getWindow());
+       stage.setTitle("Dashboard");
+       Pane myPane = null;
+       myPane = FXMLLoader.load(getClass().getResource("/fxml/dashboard_admin.fxml"));
+       Scene scene = new Scene(myPane);
+       stage.setScene(scene);    
+       stage.show();
     }
 }

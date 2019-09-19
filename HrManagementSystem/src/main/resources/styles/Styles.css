@@ -1,3 +1,4 @@
+ /*css for login page*/
 .button {
     -fx-font-weight: bold;
 }
@@ -18,3 +19,7 @@
         -fx-display: inline-block;
         -fx-font-weight: bold;
 }
+
+ /*css for login page ends here*/
+ 
+ 
