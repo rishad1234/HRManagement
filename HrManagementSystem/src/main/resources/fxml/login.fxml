@@ -44,7 +44,7 @@
          </cursor>
       </Button>
       <Separator layoutX="331.0" layoutY="215.0" prefHeight="3.0" prefWidth="350.0" />
-      <Label fx:id="errorLabel" layoutX="331.0" layoutY="467.0" prefHeight="30.0" prefWidth="350.0" textFill="#757575">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="331.0" layoutY="467.0" prefHeight="30.0" prefWidth="350.0" textFill="#f51616">
          <font>
             <Font size="20.0" />
          </font>

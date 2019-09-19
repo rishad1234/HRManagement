@@ -16,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import utils.AttributeHash;
+import utils.CleanStringAttribute;
 
 public class LoginController implements Initializable {
     
@@ -28,41 +30,23 @@ public class LoginController implements Initializable {
     @FXML
     private Label errorLabel;
     
-//    @FXML
-//    private void handleButtonAction(ActionEvent event) {
-//        Connection connection = null;
-//        try {
-//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        try {
-//            connection = DriverManager.getConnection(
-//                    "jdbc:sqlserver://localhost:1433;databaseName=HRManagementSystem;selectMethod=cursor",
-//                    "sa", "123456");
-//        } catch (SQLException ex) {
-//            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        try {
-//            System.out.println(connection.getMetaData().getDatabaseProductName());
-//            
-//            if(connection.getMetaData().getDatabaseProductName().equals("Microsoft SQL Server")){
-//                label.setText("Connection established");
-//            }else{
-//                label.setText("Some problem occured during connection");
-//            }
-//        } catch (SQLException ex) {
-//
-//        }
-//        System.out.println("You clicked me!");
-//    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         loginButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+                String userEmail = CleanStringAttribute.clean(email.getText());
+                String userPassword = CleanStringAttribute.clean(password.getText());
+               
+                if(!CleanStringAttribute.stringValidate(userEmail) &&
+                        !CleanStringAttribute.stringValidate(userPassword)){
+                    
+                    userPassword = AttributeHash.hash(userPassword);
+                }else{
+                    errorLabel.setText("All the fields are required");
+                    
+                }
             }
         });
     }    
