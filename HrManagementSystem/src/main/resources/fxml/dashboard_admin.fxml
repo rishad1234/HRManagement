@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.AdminDashboardController">
     <stylesheets>
@@ -12,8 +15,37 @@
    <children>
       <TabPane layoutX="-1.0" layoutY="-5.0" prefHeight="603.0" prefWidth="1000.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1" />
-          <Tab text="Untitled Tab 2" />
+            <Tab text="Home">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #b2dfdb;">
+                     <children>
+                        <PieChart layoutX="19.0" layoutY="29.0" prefHeight="193.0" prefWidth="224.0" />
+                        <PieChart layoutX="728.0" layoutY="25.0" prefHeight="193.0" prefWidth="224.0" />
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+          <Tab text="Deapartments">
+               <content>
+                  <AnchorPane prefHeight="574.0" prefWidth="715.0">
+                     <children>
+                        <Pane layoutX="3.0" prefHeight="576.0" prefWidth="162.0" style="-fx-background-color: #00BCD4;">
+                           <children>
+                              <Button layoutX="23.0" layoutY="18.0" mnemonicParsing="false" text="Button" />
+                              <Button layoutX="23.0" layoutY="56.0" mnemonicParsing="false" text="Button" />
+                              <Button layoutX="23.0" layoutY="101.0" mnemonicParsing="false" text="Button" />
+                              <Button layoutX="20.0" layoutY="148.0" mnemonicParsing="false" text="Button" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="157.0" prefHeight="576.0" prefWidth="842.0" style="-fx-background-color: #b2dfdb;" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Payrolls" />
+            <Tab text="Employees" />
+            <Tab text="Incomes" />
+            <Tab text="Expenses" />
         </tabs>
       </TabPane>
    </children>
