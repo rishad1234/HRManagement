@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import utils.AttributeHash;
 import utils.CleanStringAttribute;
+import utils.ConnectDB;
 
 public class LoginController implements Initializable {
     
@@ -42,10 +43,17 @@ public class LoginController implements Initializable {
                 if(!CleanStringAttribute.stringValidate(userEmail) &&
                         !CleanStringAttribute.stringValidate(userPassword)){
                     
+                    errorLabel.setText("");
                     userPassword = AttributeHash.hash(userPassword);
+                    
+                    Connection connection = ConnectDB.makeConnection();
+                    
+                    // do the code here
+                    
+                    ConnectDB.close();
+                    
                 }else{
                     errorLabel.setText("All the fields are required");
-                    
                 }
             }
         });
