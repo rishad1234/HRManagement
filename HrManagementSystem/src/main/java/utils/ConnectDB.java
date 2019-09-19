@@ -19,9 +19,9 @@ public class ConnectDB {
 public static String databaseName = "HRManagementSystem";
     public static final String username = "sa";
     public static final String password = "123456";
-    
     private static Connection connection;
-    private String makeConnectionString(){
+    
+    private static String makeConnectionString(){
         return "jdbc:sqlserver://localhost:1433;databaseName="+ databaseName +";selectMethod=cursor";
     }
     
@@ -29,7 +29,7 @@ public static String databaseName = "HRManagementSystem";
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(
-                        "jdbc:sqlserver://localhost:1433;databaseName=ProjectDB;selectMethod=cursor",
+                        makeConnectionString(),
                         "sa", "123456");
             System.out.println(connection.getMetaData().getDatabaseProductName());
                 

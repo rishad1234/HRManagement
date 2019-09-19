@@ -2,10 +2,8 @@ package controllers;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +17,7 @@ import javafx.scene.control.TextField;
 import utils.AttributeHash;
 import utils.CleanStringAttribute;
 import utils.ConnectDB;
+import utils.EmailValidator;
 
 public class LoginController implements Initializable {
     
@@ -41,7 +40,8 @@ public class LoginController implements Initializable {
                 String userPassword = CleanStringAttribute.clean(password.getText());
                
                 if(!CleanStringAttribute.stringValidate(userEmail) &&
-                        !CleanStringAttribute.stringValidate(userPassword)){
+                        !CleanStringAttribute.stringValidate(userPassword) &&
+                        EmailValidator.emailValidate(userEmail)){
                     
                     errorLabel.setText("");
                     userPassword = AttributeHash.hash(userPassword);
@@ -49,11 +49,36 @@ public class LoginController implements Initializable {
                     Connection connection = ConnectDB.makeConnection();
                     
                     // do the code here
+                    String sql = "select * from employees where email=? and password=?";
+                    
+                    try {
+                        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                        preparedStatement.setString(1, userEmail);
+                        preparedStatement.setString(2, userPassword);
+                        
+                        ResultSet data = preparedStatement.executeQuery();
+                        
+                        while (data.next()) { /* looping through the resultset */
+
+                            System.out.println(data.getString("first_name"));
+                            System.out.println(data.getString("last_name"));
+                            System.out.println(data.getString("designation"));
+                            System.out.println("");
+                        }
+                        
+                    } catch (Exception ex) {
+                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     
                     ConnectDB.close();
                     
+                }else if(!EmailValidator.emailValidate(userEmail)){
+                    errorLabel.setText("Email is not in correct form");
+                    password.setText("");
                 }else{
                     errorLabel.setText("All the fields are required");
+                    email.setText("");
+                    password.setText("");
                 }
             }
         });
