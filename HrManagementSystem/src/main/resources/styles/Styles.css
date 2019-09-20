@@ -1,17 +1,14 @@
  /*css for login page*/
-.button {
-    -fx-font-weight: bold;
-}
-
-#loginButton{
+#Button{
         -fx-border: none;
         -fx-text-align: center;
+        -fx-font-size: 20;
         -fx-text-decoration: none;
         -fx-display: inline-block;
         -fx-font-weight: bold;
 }
 
-#loginButton:hover,  #loginButton:focused{
+#Button:hover,  #Button:focused{
         -fx-border: none;
         -fx-text-align: center;
         -fx-font-size: 20;

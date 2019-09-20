@@ -109,7 +109,7 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <Button fx:id="addNewDepartmentButton" layoutX="836.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" style="-fx-background-radius: 10;" text="Add New">
+                              <Button id="Button" fx:id="addNewDepartmentButton" layoutX="836.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Add New">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -133,7 +133,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Button fx:id="addNewPayrollsButton" layoutX="836.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" style="-fx-background-radius: 10;" text="Add New">
+                        <Button id="Button" fx:id="addNewPayrollsButton" layoutX="836.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Add New">
                            <font>
                               <Font size="20.0" />
                            </font>
