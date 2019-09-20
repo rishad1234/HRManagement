@@ -3,12 +3,15 @@
 <?import java.net.URL?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.AdminDashboardController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminDashboardController">
     <stylesheets>
         <URL value="@/styles/Styles.css" />
     </stylesheets>
@@ -19,8 +22,77 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #b2dfdb;">
                      <children>
-                        <PieChart layoutX="19.0" layoutY="29.0" prefHeight="193.0" prefWidth="224.0" />
-                        <PieChart layoutX="728.0" layoutY="25.0" prefHeight="193.0" prefWidth="224.0" />
+                        <PieChart fx:id="incomeExpensePieChart" layoutX="5.0" layoutY="4.0" prefHeight="292.0" prefWidth="332.0" />
+                        <Pane layoutX="27.0" layoutY="313.0" prefHeight="111.0" prefWidth="166.0" style="-fx-background-radius: 10; -fx-border-color: #BDBDBD; -fx-border-radius: 10; -fx-border-width: 5;">
+                           <children>
+                              <Label layoutX="35.0" layoutY="14.0" text="Total salary" textFill="#757575">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="30.0" layoutY="50.0" text="350,000" textFill="#757575">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <PieChart fx:id="expensePieChart" layoutX="663.0" layoutY="5.0" prefHeight="292.0" prefWidth="332.0" />
+                        <PieChart fx:id="incomePieChart" layoutX="327.0" layoutY="5.0" prefHeight="292.0" prefWidth="332.0" />
+                        <Pane layoutX="27.0" layoutY="441.0" prefHeight="111.0" prefWidth="166.0" style="-fx-background-radius: 10; -fx-border-color: #BDBDBD; -fx-border-radius: 10; -fx-border-width: 5;">
+                           <children>
+                              <Label layoutX="35.0" layoutY="14.0" text="Avg. salary" textFill="#757575">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="40.0" layoutY="50.0" text="25000" textFill="#757575">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="212.0" layoutY="314.0" prefHeight="111.0" prefWidth="166.0" style="-fx-background-radius: 10; -fx-border-color: #BDBDBD; -fx-border-radius: 10; -fx-border-width: 5;">
+                           <children>
+                              <Label layoutX="11.0" layoutY="14.0" text="Total Employees" textFill="#757575">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="57.0" layoutY="50.0" text="250" textFill="#757575">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="214.0" layoutY="438.0" prefHeight="111.0" prefWidth="166.0" style="-fx-background-radius: 10; -fx-border-color: #BDBDBD; -fx-border-radius: 10; -fx-border-width: 5;">
+                           <children>
+                              <Label layoutX="13.0" layoutY="14.0" text="New Employees" textFill="#757575">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="65.0" layoutY="50.0" text="12" textFill="#757575">
+                                 <font>
+                                    <Font size="32.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <ProgressIndicator fx:id="maleProgress" layoutX="446.0" layoutY="340.0" prefHeight="202.0" prefWidth="229.0" progress="0.0" style="-fx-progress-color: #f44336;" />
+                        <ProgressIndicator fx:id="femaleProgress" layoutX="701.0" layoutY="338.0" prefHeight="202.0" prefWidth="229.0" progress="0.0" />
+                        <Label layoutX="542.0" layoutY="302.0" text="Male" textFill="#757575">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="793.0" layoutY="300.0" text="Female" textFill="#757575">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                </content>
