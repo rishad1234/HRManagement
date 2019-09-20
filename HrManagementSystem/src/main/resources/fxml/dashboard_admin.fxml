@@ -124,7 +124,28 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Payrolls" />
+            <Tab text="Payrolls">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B2DFDB;">
+                     <children>
+                        <TableView fx:id="payrollTable" layoutX="2.0" layoutY="69.0" prefHeight="507.0" prefWidth="1000.0">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Button fx:id="addNewPayrollsButton" layoutX="836.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" style="-fx-background-radius: 10;" text="Add New">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="22.0" layoutY="21.0" prefHeight="30.0" prefWidth="123.0" text="Payrolls">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </content></Tab>
             <Tab text="Employees" />
             <Tab text="Incomes" />
             <Tab text="Expenses" />

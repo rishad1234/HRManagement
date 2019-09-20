@@ -50,6 +50,10 @@ public class AdminDashboardController implements Initializable {
     private TableView departmentTable;
     @FXML
     private Button addNewDepartmentButton;
+    @FXML
+    private Button addNewPayrollsButton;
+    @FXML
+    private TableView payrollTable;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -83,11 +87,11 @@ public class AdminDashboardController implements Initializable {
         
         femaleProgress.setProgress(0.25);
         
-        TableColumn firstNameCol = new TableColumn("Department ID");
-        TableColumn lastNameCol = new TableColumn("Department Name");
-        TableColumn emailCol = new TableColumn("Department Head");
+        TableColumn deptId = new TableColumn("Department ID");
+        TableColumn deptName = new TableColumn("Department Name");
+        TableColumn deptHead = new TableColumn("Department Head");
         
-        departmentTable.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+        departmentTable.getColumns().addAll(deptId, deptName, deptHead);
         
         addNewDepartmentButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -97,6 +101,30 @@ public class AdminDashboardController implements Initializable {
                 Pane myPane = null;
                 try {
                     myPane = FXMLLoader.load(getClass().getResource("/fxml/add_new_department.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Scene scene = new Scene(myPane);
+                stage.setScene(scene);    
+                stage.show();
+            }
+        });
+        
+        
+        TableColumn payrollId = new TableColumn("Payroll ID");
+        TableColumn payrollSalary = new TableColumn("Salary");
+        TableColumn payrollIncrement = new TableColumn("Increment");
+        
+        payrollTable.getColumns().addAll(payrollId, payrollSalary, payrollIncrement);
+        
+        addNewPayrollsButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = new Stage();
+                stage.setTitle("Add new Payroll");
+                Pane myPane = null;
+                try {
+                    myPane = FXMLLoader.load(getClass().getResource("/fxml/add_new_payroll.fxml"));
                 } catch (IOException ex) {
                     Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
                 }
