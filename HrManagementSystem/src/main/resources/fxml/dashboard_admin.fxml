@@ -102,7 +102,7 @@
                <content>
                   <AnchorPane prefHeight="574.0" prefWidth="715.0">
                      <children>
-                        <Pane prefHeight="576.0" prefWidth="999.0" style="-fx-background-color: #b2dfdb;">
+                        <Pane prefHeight="576.0" prefWidth="1002.0" style="-fx-background-color: #b2dfdb;">
                            <children>
                               <TableView fx:id="departmentTable" layoutX="2.0" layoutY="69.0" prefHeight="507.0" prefWidth="1000.0">
                                  <columnResizePolicy>
