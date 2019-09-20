@@ -5,14 +5,26 @@
  */
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -34,6 +46,10 @@ public class AdminDashboardController implements Initializable {
     private ProgressIndicator maleProgress;
     @FXML
     private ProgressIndicator femaleProgress;
+    @FXML
+    private TableView departmentTable;
+    @FXML
+    private Button addNewDepartmentButton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -66,6 +82,29 @@ public class AdminDashboardController implements Initializable {
         maleProgress.setProgress(0.75);
         
         femaleProgress.setProgress(0.25);
+        
+        TableColumn firstNameCol = new TableColumn("Department ID");
+        TableColumn lastNameCol = new TableColumn("Department Name");
+        TableColumn emailCol = new TableColumn("Department Head");
+        
+        departmentTable.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+        
+        addNewDepartmentButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = new Stage();
+                stage.setTitle("Add new Department");
+                Pane myPane = null;
+                try {
+                    myPane = FXMLLoader.load(getClass().getResource("/fxml/add_new_department.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Scene scene = new Scene(myPane);
+                stage.setScene(scene);    
+                stage.show();
+            }
+        });
     }    
     
 }
