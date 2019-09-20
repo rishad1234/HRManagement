@@ -54,6 +54,10 @@ public class AdminDashboardController implements Initializable {
     private Button addNewPayrollsButton;
     @FXML
     private TableView payrollTable;
+    @FXML
+    private TableView incomesTable;
+    @FXML
+    private Button addNewIncomeButton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -125,6 +129,31 @@ public class AdminDashboardController implements Initializable {
                 Pane myPane = null;
                 try {
                     myPane = FXMLLoader.load(getClass().getResource("/fxml/add_new_payroll.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Scene scene = new Scene(myPane);
+                stage.setScene(scene);    
+                stage.show();
+            }
+        });
+        
+        TableColumn IncomeId = new TableColumn("Income ID");
+        TableColumn IncomeDeptName = new TableColumn("Department");
+        TableColumn incomeAmount = new TableColumn("Amount");
+        TableColumn incomeProjectName = new TableColumn("Project Name");
+        TableColumn incomeClient = new TableColumn("Client");
+        
+        incomesTable.getColumns().addAll(IncomeId, IncomeDeptName, incomeAmount,incomeProjectName, incomeClient);
+        
+        addNewIncomeButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = new Stage();
+                stage.setTitle("Add new Income");
+                Pane myPane = null;
+                try {
+                    myPane = FXMLLoader.load(getClass().getResource("/fxml/add_new_income.fxml"));
                 } catch (IOException ex) {
                     Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -147,7 +147,28 @@
                   </Pane>
                </content></Tab>
             <Tab text="Employees" />
-            <Tab text="Incomes" />
+            <Tab text="Incomes">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B2DFDB;">
+                     <children>
+                        <TableView fx:id="incomesTable" layoutY="69.0" prefHeight="507.0" prefWidth="1000.0">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Label layoutX="16.0" layoutY="18.0" prefHeight="30.0" prefWidth="123.0" text="Incomes">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Button id="Button" fx:id="addNewIncomeButton" layoutX="836.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Add New">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </content></Tab>
             <Tab text="Expenses" />
         </tabs>
       </TabPane>
