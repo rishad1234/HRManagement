@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="442.0" prefWidth="553.0" style="-fx-background-color: #B2DFDB;" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controllers.AddNewEmployeeController">
+    <stylesheets>
+        <URL value="@/styles/Styles.css" />
+    </stylesheets>
+   <children>
+      <Label layoutX="45.0" layoutY="61.0" text="Name : " textAlignment="RIGHT">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField focusTraversable="false" layoutX="155.0" layoutY="55.0" prefHeight="39.0" prefWidth="255.0" promptText="Enter Project Name" style="-fx-background-radius: 10;">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </TextField>
+      <Label layoutX="45.0" layoutY="132.0" text="Email : " textAlignment="RIGHT">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField focusTraversable="false" layoutX="155.0" layoutY="126.0" prefHeight="39.0" prefWidth="255.0" promptText="Enter Project Name" style="-fx-background-radius: 10;">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </TextField>
+      <Label layoutX="45.0" layoutY="208.0" text="Phone :" textAlignment="RIGHT">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField focusTraversable="false" layoutX="155.0" layoutY="202.0" prefHeight="39.0" prefWidth="255.0" promptText="Enter Project Name" style="-fx-background-radius: 10;">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </TextField>
+      <Label layoutX="45.0" layoutY="287.0" text="Department :" textAlignment="RIGHT">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField focusTraversable="false" layoutX="155.0" layoutY="281.0" prefHeight="39.0" prefWidth="255.0" promptText="Enter Project Name" style="-fx-background-radius: 10;">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </TextField>
+   </children>
+</AnchorPane>

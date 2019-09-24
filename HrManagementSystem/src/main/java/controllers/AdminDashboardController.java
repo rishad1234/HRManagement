@@ -53,7 +53,17 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private Button addNewPayrollsButton;
     @FXML
+    private Button addNewEmployeesButton;
+    @FXML
+    private Button addNewExpensesButton;
+    @FXML
+    private Button searchEmployeeButton;
+    @FXML
     private TableView payrollTable;
+    @FXML
+    private TableView employeeTable;
+    @FXML
+    private TableView expensesTable;
     @FXML
     private TableView incomesTable;
     @FXML
@@ -138,6 +148,36 @@ public class AdminDashboardController implements Initializable {
             }
         });
         
+        
+        /// Employee Table Code
+        TableColumn employeeId = new TableColumn("Employee ID");
+        TableColumn employeeName = new TableColumn("Name");
+        TableColumn employeeEmail = new TableColumn("Email");
+        TableColumn employeePhone = new TableColumn("Phone");
+        TableColumn employeeDepartment = new TableColumn("Department");
+        
+        employeeTable.getColumns().addAll(employeeId, employeeName, employeeEmail, employeePhone, employeeDepartment);
+        
+        addNewEmployeesButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = new Stage();
+                stage.setTitle("Add new Employee");
+                Pane myPane = null;
+                try {
+                    myPane = FXMLLoader.load(getClass().getResource("/fxml/add_new_employee.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Scene scene = new Scene(myPane);
+                stage.setScene(scene);    
+                stage.show();
+            }
+        });
+        
+        
+        /// Employee Table Code Ends Here
+        
         TableColumn IncomeId = new TableColumn("Income ID");
         TableColumn IncomeDeptName = new TableColumn("Department");
         TableColumn incomeAmount = new TableColumn("Amount");
@@ -162,6 +202,36 @@ public class AdminDashboardController implements Initializable {
                 stage.show();
             }
         });
+        
+        
+        /// Expenses Code Here
+        TableColumn expensesId = new TableColumn("Income ID");
+        TableColumn expensesName = new TableColumn("Department");
+        TableColumn expensesAmount = new TableColumn("Amount");
+        
+        expensesTable.getColumns().addAll(expensesId, expensesName, expensesAmount);
+        
+        addNewExpensesButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                /// code goes here
+                
+                Stage stage = new Stage();
+                stage.setTitle("Add new Expense");
+                Pane myPane = null;
+                try {
+                    myPane = FXMLLoader.load(getClass().getResource("/fxml/add_new_expense.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Scene scene = new Scene(myPane);
+                stage.setScene(scene);    
+                stage.show();
+                
+            }
+        });
+        
+        /// Expenses Code End here
     }    
     
 }

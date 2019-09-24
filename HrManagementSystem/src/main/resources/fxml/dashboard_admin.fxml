@@ -146,7 +146,33 @@
                      </children>
                   </Pane>
                </content></Tab>
-            <Tab text="Employees" />
+            <Tab text="Employees">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B2DFDB;">
+                     <children>
+                        <TableView fx:id="employeeTable" layoutX="2.0" layoutY="69.0" prefHeight="507.0" prefWidth="1000.0" >
+                            <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Button id="Button" fx:id="addNewEmployeesButton" layoutX="836.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Add New">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="22.0" layoutY="21.0" prefHeight="30.0" prefWidth="123.0" text="Employees">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Button id="Button" fx:id="searchEmployeeButton" layoutX="628.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="189.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Search Employee">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </content></Tab>
             <Tab text="Incomes">
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B2DFDB;">
@@ -156,7 +182,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Label layoutX="16.0" layoutY="18.0" prefHeight="30.0" prefWidth="123.0" text="Incomes">
+                        <Label layoutX="22.0" layoutY="21.0" prefHeight="30.0" prefWidth="123.0" text="Incomes">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -169,7 +195,28 @@
                      </children>
                   </Pane>
                </content></Tab>
-            <Tab text="Expenses" />
+            <Tab text="Expenses">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #B2DFDB;">
+                     <children>
+                        <TableView fx:id="expensesTable" layoutX="2.0" layoutY="69.0" prefHeight="507.0" prefWidth="1000.0" >
+                            <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <Label layoutX="22.0" layoutY="21.0" prefHeight="30.0" prefWidth="123.0" text="Expenses">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Button id="Button" fx:id="addNewExpensesButton" layoutX="836.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Add New">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </content></Tab>
         </tabs>
       </TabPane>
    </children>
