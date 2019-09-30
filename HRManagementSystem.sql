@@ -34,21 +34,24 @@ create table employees(
 	employee_id int identity(1, 1) primary key,
 	department_id int NOT NULL FOREIGN KEY REFERENCES departments (department_id),
 	payroll_id int NOT NULL FOREIGN KEY REFERENCES payrolls (payroll_id),
-	first_name varchar(255) not null,
-	last_name varchar(255) not null,
-	phone varchar(255) not null,
-	email varchar(255) not null,
-	password varchar(255) not null,
+	first_name varchar(255),
+	last_name varchar(255),
+	phone varchar(255) unique,
+	email varchar(255) unique,
+	password varchar(255),
 	gender varchar(2),
-	joining_date date not null,
-	date_of_birth date not null,
+	joining_date date,
+	date_of_birth date,
 	retirement_date date,
+	designation varchar(255)
 )
+
 
 create table holiday(
 	employee_id int NOT NULL FOREIGN KEY REFERENCES employees (employee_id),
 	holiday_date_taken date not null,
 )
+
 
 use HRManagementSystem
 
