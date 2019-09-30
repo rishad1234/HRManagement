@@ -79,11 +79,13 @@ public class LoginController implements Initializable {
 
             while (data.next()) { /* looping through the resultset */
                 if(data.getString("email").equals(userEmail) &&
-                        data.getString("password").equals(userPassword) &&
-                        data.getString("designation").equals("Administrator")){
-                    System.out.println("login successful");
-                    gotoAdminPanel();
-                    break;
+                        data.getString("password").equals(userPassword)){
+                    
+                    if(data.getString("designation").equals("Administrator")){
+                        System.out.println("login successful");
+                        gotoAdminPanel();
+                        break;
+                    }
                 }
             }
         } catch (Exception ex) {
@@ -97,6 +99,16 @@ public class LoginController implements Initializable {
        stage.setTitle("Dashboard");
        Pane myPane = null;
        myPane = FXMLLoader.load(getClass().getResource("/fxml/dashboard_admin.fxml"));
+       Scene scene = new Scene(myPane);
+       stage.setScene(scene);    
+       stage.show();
+    }
+    
+    public void gotoEmployeePanel() throws IOException {
+       Stage stage = ((Stage) email.getScene().getWindow());
+       stage.setTitle("Dashboard");
+       Pane myPane = null;
+       myPane = FXMLLoader.load(getClass().getResource("/fxml/dashboard_user.fxml"));
        Scene scene = new Scene(myPane);
        stage.setScene(scene);    
        stage.show();
