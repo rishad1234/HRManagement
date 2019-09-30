@@ -50,10 +50,22 @@ create table holiday(
 	holiday_date_taken date not null,
 )
 
+use HRManagementSystem
+
+select * from employees
+select * from incomes
+select * from departments
+select * from payrolls
+
+Insert into departments values
+('Marketing', 'Kelly Brook')
 
 
+INSERT INTO employees(department_id, payroll_id, first_name, last_name, phone, email, password, gender, joining_date, date_of_birth, designation) VALUES
+(8, 6, ' Boris', 'Wickliffe', '01716523594', 'boriswickliffe@gmail.com', HashBytes('MD5', 'admin'), 'M', '2016-02-12', '1998-07-08', 'Administrator')
 
-INSERT INTO employees(department_id, payroll_id, first_name, last_name, phone, email, password, gender, joining_date, date_of_birth, retirement_date) VALUES
+
+INSERT INTO employees(department_id, payroll_id, first_name, last_name, phone, email, password, gender, joining_date, date_of_birth, retirement_date, designation) VALUES
 (1, 6, 'Rishad', 'Khan', '01716523594', 'rishad@gmail.com', HashBytes('MD5', 'rishad'), 'M', '2016-02-12', '1998-07-08', null),
 (2, 5, 'Arafat', 'Uddin', '01526985634', 'arafat@gmail.com', HashBytes('MD5', 'arafat'), 'M', '2018-05-19', '1997-11-01', null),
 (3, 4, 'Rafat', 'Haque', '01915632587', 'rafat@gmail.com', HashBytes('MD5', 'rafat'), 'M', '2015-01-01', '1995-12-01', null),
