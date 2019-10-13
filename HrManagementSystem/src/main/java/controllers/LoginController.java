@@ -51,7 +51,7 @@ public class LoginController implements Initializable {
                     
                     errorLabel.setText("");
                     userPassword = AttributeHash.hash(userPassword);
-                    
+                            
                     checkLogin(userEmail, userPassword);
                     
                 }else if(!EmailValidator.emailValidate(userEmail)){
@@ -69,21 +69,28 @@ public class LoginController implements Initializable {
     private void checkLogin(String userEmail, String userPassword){
         Connection connection = ConnectDB.makeConnection();
         // do the code here
-        String sql = "select * from employees where email=? and password=?";
+        //String sql = "select * from employees where email=? and password=?";
+        String sql = "select * from employees";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, userEmail);
-            preparedStatement.setString(2, userPassword);
+//            preparedStatement.setString(1, userEmail);
+//            preparedStatement.setString(2, userPassword);
 
             ResultSet data = preparedStatement.executeQuery();
-
+            System.out.println(data.toString());
+            
             while (data.next()) { /* looping through the resultset */
+                System.out.println("dhukse1");
                 if(data.getString("email").equals(userEmail) &&
                         data.getString("password").equals(userPassword)){
-                    
+
                     if(data.getString("designation").equals("Administrator")){
                         System.out.println("login successful");
                         gotoAdminPanel();
+                        break;
+                    }else{
+                        System.out.println("dhukse");
+                        gotoEmployeePanel();
                         break;
                     }
                 }
