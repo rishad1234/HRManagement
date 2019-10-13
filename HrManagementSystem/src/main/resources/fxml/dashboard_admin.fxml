@@ -33,7 +33,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="30.0" layoutY="50.0" text="350,000" textFill="#757575">
+                              <Label fx:id="totalSalary" layoutX="30.0" layoutY="50.0" text="350,000" textFill="#757575">
                                  <font>
                                     <Font size="32.0" />
                                  </font>
@@ -49,7 +49,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="40.0" layoutY="50.0" text="25000" textFill="#757575">
+                              <Label fx:id="averageSalary" layoutX="40.0" layoutY="50.0" text="25000" textFill="#757575">
                                  <font>
                                     <Font size="32.0" />
                                  </font>
@@ -63,7 +63,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="57.0" layoutY="50.0" text="250" textFill="#757575">
+                              <Label fx:id="numberOfEmployees" layoutX="57.0" layoutY="50.0" text="250" textFill="#757575">
                                  <font>
                                     <Font size="32.0" />
                                  </font>
@@ -77,7 +77,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="65.0" layoutY="50.0" text="12" textFill="#757575">
+                              <Label fx:id="newEmployee" layoutX="65.0" layoutY="50.0" text="12" textFill="#757575">
                                  <font>
                                     <Font size="32.0" />
                                  </font>

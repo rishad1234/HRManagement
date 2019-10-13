@@ -69,12 +69,9 @@ public class LoginController implements Initializable {
     private void checkLogin(String userEmail, String userPassword){
         Connection connection = ConnectDB.makeConnection();
         // do the code here
-        //String sql = "select * from employees where email=? and password=?";
         String sql = "select * from employees";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-//            preparedStatement.setString(1, userEmail);
-//            preparedStatement.setString(2, userPassword);
 
             ResultSet data = preparedStatement.executeQuery();
             System.out.println(data.toString());
@@ -96,7 +93,6 @@ public class LoginController implements Initializable {
         } catch (Exception ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ConnectDB.close();
     }
     
     public void gotoAdminPanel() throws IOException {

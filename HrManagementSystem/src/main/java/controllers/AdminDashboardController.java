@@ -7,6 +7,9 @@ package controllers;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,11 +23,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import models.Employee;
+import models.Expense;
+import models.Income;
+import models.Payroll;
 
 /**
  * FXML Controller class
@@ -68,38 +76,44 @@ public class AdminDashboardController implements Initializable {
     private TableView incomesTable;
     @FXML
     private Button addNewIncomeButton;
+    @FXML
+    private Label totalSalary;
+    @FXML
+    private Label numberOfEmployees;
+    @FXML
+    private Label averageSalary;
+    @FXML
+    private Label newEmployee;
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         ObservableList<PieChart.Data> incomeExpenseChartData =
                 FXCollections.observableArrayList(
-                new PieChart.Data("Income", 130000),
-                new PieChart.Data("Expense", 75000));
+                new PieChart.Data("Income", Income.getTotalIncome()),
+                new PieChart.Data("Expense", Expense.getTotalExpense()));
         incomeExpensePieChart.setData(incomeExpenseChartData);
         incomeExpensePieChart.setTitle("Income-Expense Chart");
         
-        ObservableList<PieChart.Data> incomeChartData =
-                FXCollections.observableArrayList(
-                new PieChart.Data("Sales", 25000),
-                new PieChart.Data("Marketing", 50000),
-                new PieChart.Data("Development", 65000));
-        incomePieChart.setData(incomeChartData);
+        //this method sets the piechart of income pie chart
+        getIncomeData();
         
-        incomePieChart.setTitle("Income Chart");
+        //this method set the piechart of expense pie chart
+        getExpenseData();
         
-        ObservableList<PieChart.Data> expenseChartData =
-                FXCollections.observableArrayList(
-                new PieChart.Data("Sales", 25000),
-                new PieChart.Data("Marketing", 35000),
-                new PieChart.Data("Development", 15000));
-        expensePieChart.setData(expenseChartData);
+        totalSalary.setText(String.valueOf(Payroll.getTotalSalary()));
         
-        expensePieChart.setTitle("Expense Chart");
+        numberOfEmployees.setText(String.valueOf(Employee.countEmployees()));
         
-        maleProgress.setProgress(0.75);
+        averageSalary.setText(String.valueOf(Payroll.getAvgSalary()));
         
-        femaleProgress.setProgress(0.25);
+        newEmployee.setText(String.valueOf(Employee.getNewEmployee()));
+        
+        maleProgress.setProgress((double)Employee.totalMale()/Employee.countEmployees());
+        
+        femaleProgress.setProgress(1.00 - (double)Employee.totalMale()/Employee.countEmployees());
         
         TableColumn deptId = new TableColumn("Department ID");
         TableColumn deptName = new TableColumn("Department Name");
@@ -233,5 +247,35 @@ public class AdminDashboardController implements Initializable {
         
         /// Expenses Code End here
     }    
+    
+    public void getIncomeData(){
+        ObservableList<PieChart.Data> incomeChartData = FXCollections.observableArrayList();
+        ResultSet data = Income.getTotalIncomesByDepartments();
+        try {
+            while(data.next()){
+                incomeChartData.add(new PieChart.Data(data.getString("department_name"), 
+                        (int)data.getDouble("total_income")));
+            }
+            incomePieChart.setData(incomeChartData);
+            incomePieChart.setTitle("Income Chart");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void getExpenseData(){
+        ObservableList<PieChart.Data> expenseChartData = FXCollections.observableArrayList();
+        ResultSet data = Expense.getTotalExpensesByDepartments();
+        try {
+            while(data.next()){
+                expenseChartData.add(new PieChart.Data(data.getString("department_name"), 
+                        (int)data.getDouble("total_expense")));
+            }
+            expensePieChart.setData(expenseChartData);
+            expensePieChart.setTitle("Expense Chart");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

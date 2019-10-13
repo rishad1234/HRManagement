@@ -43,11 +43,4 @@ public static String databaseName = "HRManagementSystem";
         }
         return connection;
     }
-    public static void close(){
-        try {
-            connection.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }
