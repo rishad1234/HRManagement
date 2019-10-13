@@ -27,8 +27,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import models.Department;
 import models.Employee;
 import models.Expense;
 import models.Income;
@@ -54,8 +56,6 @@ public class AdminDashboardController implements Initializable {
     private ProgressIndicator maleProgress;
     @FXML
     private ProgressIndicator femaleProgress;
-    @FXML
-    private TableView departmentTable;
     @FXML
     private Button addNewDepartmentButton;
     @FXML
@@ -85,6 +85,14 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private Label newEmployee;
     
+    @FXML
+    private TableView<Department> departmentTable;
+    @FXML
+    private TableColumn<Department,Integer> departmentId;
+    @FXML
+    private TableColumn<Department,String> departmentName;
+    @FXML
+    private TableColumn<Department,String> departmentHead;
     
     
     @Override
@@ -115,11 +123,8 @@ public class AdminDashboardController implements Initializable {
         
         femaleProgress.setProgress(1.00 - (double)Employee.totalMale()/Employee.countEmployees());
         
-        TableColumn deptId = new TableColumn("Department ID");
-        TableColumn deptName = new TableColumn("Department Name");
-        TableColumn deptHead = new TableColumn("Department Head");
-        
-        departmentTable.getColumns().addAll(deptId, deptName, deptHead);
+        //this method adds data to the department table
+        addDepartmentDataToTable();
         
         addNewDepartmentButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -278,4 +283,12 @@ public class AdminDashboardController implements Initializable {
         }
     }
     
+    public void addDepartmentDataToTable(){
+        ObservableList<Department> departments = Department.getAllDepartments();
+        departmentId.setCellValueFactory(new PropertyValueFactory<Department, Integer>("departmentId"));
+        departmentName.setCellValueFactory(new PropertyValueFactory<Department, String>("departmentName"));
+        departmentHead.setCellValueFactory(new PropertyValueFactory<Department, String>("departmentHead"));
+        
+        departmentTable.setItems(departments);
+    }
 }
