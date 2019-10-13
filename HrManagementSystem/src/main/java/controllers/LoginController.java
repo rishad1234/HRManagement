@@ -80,7 +80,6 @@ public class LoginController implements Initializable {
             System.out.println(data.toString());
             
             while (data.next()) { /* looping through the resultset */
-                System.out.println("dhukse1");
                 if(data.getString("email").equals(userEmail) &&
                         data.getString("password").equals(userPassword)){
 
@@ -89,7 +88,6 @@ public class LoginController implements Initializable {
                         gotoAdminPanel();
                         break;
                     }else{
-                        System.out.println("dhukse");
                         gotoEmployeePanel();
                         break;
                     }
