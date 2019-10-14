@@ -2,9 +2,11 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -49,7 +51,7 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Pane layoutX="337.0" prefHeight="567.0" prefWidth="667.0" style="-fx-background-color: #d3dee6;">
+                        <Pane layoutX="337.0" prefHeight="567.0" prefWidth="667.0" style="-fx-background-color: #bbdefb;">
                            <children>
                               <Label layoutX="30.0" layoutY="29.0" prefHeight="47.0" prefWidth="195.0" text="Contact Information">
                                  <font>
@@ -116,7 +118,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="235.0" layoutY="388.0" prefHeight="39.0" prefWidth="264.0" text="Male">
+                              <Label alignment="CENTER" layoutX="225.0" layoutY="388.0" prefHeight="39.0" prefWidth="264.0" text="Male">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -126,6 +128,65 @@
                      </children>
                   </Pane>
                </content>
+            </Tab>
+            <Tab text="Edit Profile">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="1.0" layoutY="-5.0" prefHeight="571.0" prefWidth="321.0" style="-fx-background-color: #b3e5fc;">
+                           <children>
+                              <Label alignment="CENTER" layoutX="90.0" layoutY="44.0" prefHeight="39.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-radius: 5px;" text="Employee Name">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="109.0" prefHeight="48.0" prefWidth="209.0" text="Rishadul Islam Khan" textAlignment="CENTER" textFill="#281919">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="83.0" layoutY="182.0" prefHeight="39.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-radius: 5px;" text="Designation">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="319.0" prefHeight="566.0" prefWidth="681.0">
+                           <children>
+                              <TextField layoutX="202.0" layoutY="61.0" prefHeight="55.0" prefWidth="214.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="66.0" prefHeight="48.0" prefWidth="169.0" text="Gender:" textAlignment="CENTER" textFill="#281919">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="168.0" prefHeight="48.0" prefWidth="169.0" text="Phone Number:" textAlignment="CENTER" textFill="#281919">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="202.0" layoutY="165.0" prefHeight="55.0" prefWidth="214.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="269.0" prefHeight="48.0" prefWidth="169.0" text="Date of Birth:" textAlignment="CENTER" textFill="#281919">
+                                 <font>
+                                    <Font name="Arial" size="20.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker layoutX="202.0" layoutY="268.0" prefHeight="45.0" prefWidth="214.0" />
+                              <Button layoutX="38.0" layoutY="362.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" style="-fx-background-color: #82b3c9;" text="Submit">
+                                 <font>
+                                    <Font size="21.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="236.0" prefHeight="48.0" prefWidth="263.0" text="Senior Software Engineer" textAlignment="CENTER" textFill="#281919">
+                           <font>
+                              <Font name="Arial" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </content>
             </Tab>
          </tabs>
       </TabPane>
