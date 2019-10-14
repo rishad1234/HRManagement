@@ -9,7 +9,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -121,6 +121,11 @@
                                     <Font size="20.0" />
                                  </font>
                               </Label>
+                              <Button id="Button" fx:id="reloadDepartment" layoutX="628.0" layoutY="13.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="189.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Reload">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Button>
                            </children></Pane>
                      </children>
                   </AnchorPane>
@@ -145,6 +150,11 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
+                        <Button id="Button" fx:id="reloadPayroll" layoutX="628.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="189.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Reload">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
                      </children>
                   </Pane>
                </content></Tab>
@@ -223,18 +233,19 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #b2dfdb;">
                      <children>
-                        <TextField layoutY="1.0" prefHeight="152.0" prefWidth="891.0" />
-                        <Button layoutX="891.0" layoutY="1.0" mnemonicParsing="false" prefHeight="151.0" prefWidth="110.0" style="-fx-background-color: red;" text="Execute" textFill="#eee5e5">
+                        <Button layoutX="869.0" layoutY="56.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="110.0" style="-fx-background-color: red;" text="Run" textFill="#eee5e5">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Button>
-                        <TableView layoutX="2.0" layoutY="152.0" prefHeight="414.0" prefWidth="1000.0">
+                        <TableView layoutY="238.0" prefHeight="332.0" prefWidth="1000.0">
                           <columns>
                             <TableColumn prefWidth="75.0" text="C1" />
                             <TableColumn prefWidth="75.0" text="C2" />
                           </columns>
                         </TableView>
+                        <TextArea layoutX="14.0" layoutY="17.0" prefHeight="108.0" prefWidth="846.0" />
+                        <TextArea layoutX="14.0" layoutY="152.0" prefHeight="51.0" prefWidth="846.0" />
                      </children>
                   </Pane>
                </content>

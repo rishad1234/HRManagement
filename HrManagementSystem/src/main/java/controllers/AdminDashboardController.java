@@ -72,6 +72,10 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private Button reloadEmployee;
     @FXML
+    private Button reloadDepartment;
+    @FXML
+    private Button reloadPayroll;
+    @FXML
     private Button addNewIncomeButton;
     @FXML
     private Label totalSalary;
@@ -149,6 +153,16 @@ public class AdminDashboardController implements Initializable {
             }
         });
         
+        // reload button to reload the departments after adding new
+        reloadDepartment.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                departmentTable.getItems().clear();
+                departmentTable.getColumns().clear();
+                addDepartmentDataToTable();
+            }
+        });
+        
         //this method adds values to payroll tab
         addPayrollDataToTable();
         
@@ -166,6 +180,15 @@ public class AdminDashboardController implements Initializable {
                 Scene scene = new Scene(myPane);
                 stage.setScene(scene);    
                 stage.show();
+            }
+        });
+        
+        reloadPayroll.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                payrollTable.getItems().clear();
+                payrollTable.getColumns().clear();
+                addPayrollDataToTable();
             }
         });
         
@@ -351,6 +374,9 @@ public class AdminDashboardController implements Initializable {
             Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+    
     
     public void addEmployeeDataToTable(){
         try {

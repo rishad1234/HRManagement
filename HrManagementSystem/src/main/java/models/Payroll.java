@@ -81,4 +81,22 @@ public class Payroll {
         }
         return data;
     }
+    
+    
+    public static void insertNewPayroll(String salary, String increment){
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "insert into payrolls (salary, increment) " +
+                    "values(?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, salary);
+            statement.setString(2, increment);
+            
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
 }

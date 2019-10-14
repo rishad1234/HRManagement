@@ -50,4 +50,19 @@ public class Department {
         }
         return data;
     }
+    
+    public static void insertNewDept(String deptName, String deptHead){
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "insert into departments (department_name, department_head) " +
+                    "values(?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, deptName);
+            statement.setString(2, deptHead);
+            
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
