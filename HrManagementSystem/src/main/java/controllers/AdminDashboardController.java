@@ -72,8 +72,6 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private Button searchEmployeeButton;
     @FXML
-    private TableView payrollTable;
-    @FXML
     private TableView employeeTable;
     @FXML
     private TableView expensesTable;
@@ -92,17 +90,12 @@ public class AdminDashboardController implements Initializable {
     
     @FXML
     private TableView departmentTable;
-//    @FXML
-//    private TableColumn<Department,Integer> departmentId;
-//    @FXML
-//    private TableColumn<Department,String> departmentName;
-//    @FXML
-//    private TableColumn<Department,String> departmentHead;
-    
-    
+    @FXML
+    private TableView payrollTable;
     
     
     private ObservableList<ObservableList> departmentData;
+    private ObservableList<ObservableList> payrollData;
     
     
     @Override
@@ -153,11 +146,8 @@ public class AdminDashboardController implements Initializable {
             }
         });
         
-        TableColumn payrollId = new TableColumn("Payroll ID");
-        TableColumn payrollSalary = new TableColumn("Salary");
-        TableColumn payrollIncrement = new TableColumn("Increment");
-        
-        payrollTable.getColumns().addAll(payrollId, payrollSalary, payrollIncrement);
+        //this method adds values to payroll tab
+        addPayrollDataToTable();
         
         addNewPayrollsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -323,11 +313,48 @@ public class AdminDashboardController implements Initializable {
 
             }
 
-            //FINALLY ADDED TO TableView
             departmentTable.setItems(departmentData);
             
-            } catch (SQLException ex) {
-                Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addPayrollDataToTable(){
+        try {
+            ResultSet data = Payroll.getPayrollTable();
+            
+            ResultSetMetaData rsmd = data.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int i = 0; i < columnCount; i++ ) {
+                final int j = i;
+                String name = rsmd.getColumnName(i + 1);
+                TableColumn col = new TableColumn(name);
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
+                });
+                payrollTable.getColumns().addAll(col);
             }
+            
+            payrollData = FXCollections.observableArrayList();
+            while(data.next()){
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                System.out.println("column count: " + data.getMetaData().getColumnCount());
+                for(int i=1 ; i<=data.getMetaData().getColumnCount(); i++){
+                    row.add(data.getString(i));   
+                }
+                System.out.println("Row [1] added "+row );
+                payrollData.add(row);
+
+            }
+
+            payrollTable.setItems(payrollData);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
