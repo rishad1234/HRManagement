@@ -67,4 +67,18 @@ public class Payroll {
         }
         return data;
     }
+    
+    public static ResultSet getPayrollName(){
+        ResultSet data = null;
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "select payroll_id, salary from payrolls";
+            
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            data = preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
 }

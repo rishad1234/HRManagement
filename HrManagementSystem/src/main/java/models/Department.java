@@ -36,4 +36,18 @@ public class Department {
         }
         return data;
     }
+    
+    public static ResultSet getDepartmentName(){
+        ResultSet data = null;
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "select department_id, department_name from departments";
+            
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            data = preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
 }

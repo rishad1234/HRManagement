@@ -6,6 +6,7 @@
 package models;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -90,6 +91,27 @@ public class Employee {
             Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
+    }
+    
+    public static void insertEmployee(String fname, String lname,
+                                        String e, String pass, int dept, int pay, Date joiningDate, String designation){
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "insert into employees (first_name, last_name, email, password, joining_date, department_id, payroll_id, designation) " +
+                    "values(?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, fname);
+            statement.setString(2, lname);
+            statement.setString(3, e);
+            statement.setString(4, pass);
+            statement.setDate(5, joiningDate);
+            statement.setInt(6, dept);
+            statement.setInt(7, pay);
+            statement.setString(8, designation);
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
