@@ -26,3 +26,10 @@ SELECT count(*) as new_employee FROM employees
 WHERE DATEPART(m, joining_date) = DATEPART(m, DATEADD(m, -2, getdate()))
 AND DATEPART(yyyy, joining_date) = DATEPART(yyyy, DATEADD(m, -2, getdate()))
 
+
+select employees.employee_id, departments.department_name,
+		 payrolls.salary, employees.first_name, employees.last_name, employees.email,
+		 employees.phone from employees inner join departments 
+		 on employees.department_id = departments.department_id inner join
+		 payrolls on employees.payroll_id = payrolls.payroll_id
+

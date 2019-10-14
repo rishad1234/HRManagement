@@ -64,12 +64,15 @@ public class AddNewEmployeeController implements Initializable {
     private Button addEmployee;
     @FXML
     private TextField designation;
+    @FXML
+    private TextField phone;
     
     private String fname;
     private String lname;
     private String e;
     private String desig;
     private String pass;
+    private String phoneNumber;
     private int dept;
     private int pay;
     
@@ -111,7 +114,7 @@ public class AddNewEmployeeController implements Initializable {
             }
             department.setItems(departmentNameList);
             department.getSelectionModel().selectFirst();
-            dept = 0;
+            dept = 1;
         } catch (SQLException ex) {
             Logger.getLogger(AddNewEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -129,7 +132,7 @@ public class AddNewEmployeeController implements Initializable {
             }
             payroll.setItems(salaryList);
             payroll.getSelectionModel().selectFirst();
-            pay = 0;
+            pay = 1;
         } catch (SQLException ex) {
             Logger.getLogger(AddNewEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -141,6 +144,7 @@ public class AddNewEmployeeController implements Initializable {
         e = CleanStringAttribute.clean(email.getText());
         pass = AttributeHash.hash(CleanStringAttribute.clean(password.getText()));
         desig = CleanStringAttribute.clean(designation.getText());
+        phoneNumber = CleanStringAttribute.clean(phone.getText());
         
         if(!CleanStringAttribute.stringValidate(fname) && 
                 !CleanStringAttribute.stringValidate(lname) &&
@@ -164,7 +168,7 @@ public class AddNewEmployeeController implements Initializable {
                 }
             }
             
-            Employee.insertEmployee(fname, lname, e, pass, dept, pay, joining, desig);
+            Employee.insertEmployee(fname, lname, e, pass, dept, pay, joining, desig, phoneNumber);
             Stage stage = (Stage) addEmployee.getScene().getWindow();
             stage.close();
         }

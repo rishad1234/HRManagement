@@ -80,8 +80,8 @@ public class Employee {
         try {
             Connection connection = ConnectDB.makeConnection();
             String sql = "select employees.employee_id, departments.department_name, " + 
-                    "payrolls.salary, employees.first_name, employees.last_name, employees.email, " +
-                    "employees.phone from employees inner join departments " +
+                    "payrolls.salary, employees.first_name, employees.last_name, employees.email " +
+                    "from employees inner join departments " +
                     "on employees.department_id = departments.department_id inner join " +
                     "payrolls on employees.payroll_id = payrolls.payroll_id";
             
@@ -94,11 +94,12 @@ public class Employee {
     }
     
     public static void insertEmployee(String fname, String lname,
-                                        String e, String pass, int dept, int pay, Date joiningDate, String designation){
+                                        String e, String pass, int dept, int pay, Date joiningDate, String designation,
+                                        String phone){
         try {
             Connection connection = ConnectDB.makeConnection();
-            String sql = "insert into employees (first_name, last_name, email, password, joining_date, department_id, payroll_id, designation) " +
-                    "values(?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "insert into employees (first_name, last_name, email, password, joining_date, department_id, payroll_id, designation, phone, gender, date_of_birth) " +
+                    "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, fname);
             statement.setString(2, lname);
@@ -108,6 +109,9 @@ public class Employee {
             statement.setInt(6, dept);
             statement.setInt(7, pay);
             statement.setString(8, designation);
+            statement.setString(9, phone);
+            statement.setString(10, "M");
+            statement.setDate(11, java.sql.Date.valueOf("1990-1-1"));
             statement.execute();
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);

@@ -167,7 +167,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Button id="Button" fx:id="searchEmployeeButton" layoutX="628.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="189.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Search Employee">
+                        <Button id="Button" fx:id="reloadEmployee" layoutX="628.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="189.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Reload">
                            <font>
                               <Font size="20.0" />
                            </font>

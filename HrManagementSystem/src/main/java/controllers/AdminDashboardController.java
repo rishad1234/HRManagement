@@ -70,7 +70,7 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private Button addNewExpensesButton;
     @FXML
-    private Button searchEmployeeButton;
+    private Button reloadEmployee;
     @FXML
     private Button addNewIncomeButton;
     @FXML
@@ -235,6 +235,14 @@ public class AdminDashboardController implements Initializable {
             }
         });
         
+        reloadEmployee.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                employeeTable.getItems().clear();
+                employeeTable.getColumns().clear();
+                addEmployeeDataToTable();
+            }
+        });
         /// Expenses Code End here
     }    
     
