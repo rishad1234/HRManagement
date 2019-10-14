@@ -74,6 +74,22 @@ public class Employee {
         return totalMaleCount;
     }
     
-    
+    public static ResultSet getAllEmployees(){
+        ResultSet data = null;
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "select employees.employee_id, departments.department_name, " + 
+                    "payrolls.salary, employees.first_name, employees.last_name, employees.email, " +
+                    "employees.phone from employees inner join departments " +
+                    "on employees.department_id = departments.department_id inner join " +
+                    "payrolls on employees.payroll_id = payrolls.payroll_id";
+            
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            data = preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }
     
 }

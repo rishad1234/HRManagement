@@ -72,12 +72,6 @@ public class AdminDashboardController implements Initializable {
     @FXML
     private Button searchEmployeeButton;
     @FXML
-    private TableView employeeTable;
-    @FXML
-    private TableView expensesTable;
-    @FXML
-    private TableView incomesTable;
-    @FXML
     private Button addNewIncomeButton;
     @FXML
     private Label totalSalary;
@@ -92,10 +86,19 @@ public class AdminDashboardController implements Initializable {
     private TableView departmentTable;
     @FXML
     private TableView payrollTable;
+    @FXML
+    private TableView employeeTable;
+    @FXML
+    private TableView incomesTable;
+    @FXML
+    private TableView expensesTable;
     
     
     private ObservableList<ObservableList> departmentData;
     private ObservableList<ObservableList> payrollData;
+    private ObservableList<ObservableList> employeeData;
+    private ObservableList<ObservableList> incomeData;
+    private ObservableList<ObservableList> expenseData;
     
     
     @Override
@@ -168,13 +171,7 @@ public class AdminDashboardController implements Initializable {
         
         
         /// Employee Table Code
-        TableColumn employeeId = new TableColumn("Employee ID");
-        TableColumn employeeName = new TableColumn("Name");
-        TableColumn employeeEmail = new TableColumn("Email");
-        TableColumn employeePhone = new TableColumn("Phone");
-        TableColumn employeeDepartment = new TableColumn("Department");
-        
-        employeeTable.getColumns().addAll(employeeId, employeeName, employeeEmail, employeePhone, employeeDepartment);
+        addEmployeeDataToTable();
         
         addNewEmployeesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -195,14 +192,7 @@ public class AdminDashboardController implements Initializable {
         
         
         /// Employee Table Code Ends Here
-        
-        TableColumn IncomeId = new TableColumn("Income ID");
-        TableColumn IncomeDeptName = new TableColumn("Department");
-        TableColumn incomeAmount = new TableColumn("Amount");
-        TableColumn incomeProjectName = new TableColumn("Project Name");
-        TableColumn incomeClient = new TableColumn("Client");
-        
-        incomesTable.getColumns().addAll(IncomeId, IncomeDeptName, incomeAmount,incomeProjectName, incomeClient);
+        addIncomeDataToTable();
         
         addNewIncomeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -223,11 +213,7 @@ public class AdminDashboardController implements Initializable {
         
         
         /// Expenses Code Here
-        TableColumn expensesId = new TableColumn("Income ID");
-        TableColumn expensesName = new TableColumn("Department");
-        TableColumn expensesAmount = new TableColumn("Amount");
-        
-        expensesTable.getColumns().addAll(expensesId, expensesName, expensesAmount);
+        addExpenseDataToTable();
         
         addNewExpensesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -352,6 +338,120 @@ public class AdminDashboardController implements Initializable {
             }
 
             payrollTable.setItems(payrollData);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addEmployeeDataToTable(){
+        try {
+            ResultSet data = Employee.getAllEmployees();
+            
+            ResultSetMetaData rsmd = data.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int i = 0; i < columnCount; i++ ) {
+                final int j = i;
+                String name = rsmd.getColumnName(i + 1);
+                TableColumn col = new TableColumn(name);
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
+                });
+                employeeTable.getColumns().addAll(col);
+            }
+            
+            employeeData = FXCollections.observableArrayList();
+            while(data.next()){
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                System.out.println("column count: " + data.getMetaData().getColumnCount());
+                for(int i=1 ; i<=data.getMetaData().getColumnCount(); i++){
+                    row.add(data.getString(i));   
+                }
+                System.out.println("Row [1] added "+row );
+                employeeData.add(row);
+
+            }
+
+            employeeTable.setItems(employeeData);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addIncomeDataToTable(){
+        try {
+            ResultSet data = Income.getAllIncomes();
+            
+            ResultSetMetaData rsmd = data.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int i = 0; i < columnCount; i++ ) {
+                final int j = i;
+                String name = rsmd.getColumnName(i + 1);
+                TableColumn col = new TableColumn(name);
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
+                });
+                incomesTable.getColumns().addAll(col);
+            }
+            
+            incomeData = FXCollections.observableArrayList();
+            while(data.next()){
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                System.out.println("column count: " + data.getMetaData().getColumnCount());
+                for(int i=1 ; i<=data.getMetaData().getColumnCount(); i++){
+                    row.add(data.getString(i));   
+                }
+                System.out.println("Row [1] added "+row );
+                incomeData.add(row);
+
+            }
+
+            incomesTable.setItems(incomeData);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addExpenseDataToTable(){
+        try {
+            ResultSet data = Expense.getAllExpenses();
+            
+            ResultSetMetaData rsmd = data.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int i = 0; i < columnCount; i++ ) {
+                final int j = i;
+                String name = rsmd.getColumnName(i + 1);
+                TableColumn col = new TableColumn(name);
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
+                });
+                expensesTable.getColumns().addAll(col);
+            }
+            
+            expenseData = FXCollections.observableArrayList();
+            while(data.next()){
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                System.out.println("column count: " + data.getMetaData().getColumnCount());
+                for(int i=1 ; i<=data.getMetaData().getColumnCount(); i++){
+                    row.add(data.getString(i));   
+                }
+                System.out.println("Row [1] added "+row );
+                expenseData.add(row);
+
+            }
+
+            expensesTable.setItems(expenseData);
             
         } catch (SQLException ex) {
             Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
