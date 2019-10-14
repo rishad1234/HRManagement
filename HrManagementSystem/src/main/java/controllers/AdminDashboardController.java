@@ -8,11 +8,14 @@ package controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,10 +29,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import models.Department;
 import models.Employee;
 import models.Expense;
@@ -86,13 +91,18 @@ public class AdminDashboardController implements Initializable {
     private Label newEmployee;
     
     @FXML
-    private TableView<Department> departmentTable;
-    @FXML
-    private TableColumn<Department,Integer> departmentId;
-    @FXML
-    private TableColumn<Department,String> departmentName;
-    @FXML
-    private TableColumn<Department,String> departmentHead;
+    private TableView departmentTable;
+//    @FXML
+//    private TableColumn<Department,Integer> departmentId;
+//    @FXML
+//    private TableColumn<Department,String> departmentName;
+//    @FXML
+//    private TableColumn<Department,String> departmentHead;
+    
+    
+    
+    
+    private ObservableList<ObservableList> departmentData;
     
     
     @Override
@@ -142,7 +152,6 @@ public class AdminDashboardController implements Initializable {
                 stage.show();
             }
         });
-        
         
         TableColumn payrollId = new TableColumn("Payroll ID");
         TableColumn payrollSalary = new TableColumn("Salary");
@@ -284,11 +293,41 @@ public class AdminDashboardController implements Initializable {
     }
     
     public void addDepartmentDataToTable(){
-        ObservableList<Department> departments = Department.getAllDepartments();
-        departmentId.setCellValueFactory(new PropertyValueFactory<Department, Integer>("departmentId"));
-        departmentName.setCellValueFactory(new PropertyValueFactory<Department, String>("departmentName"));
-        departmentHead.setCellValueFactory(new PropertyValueFactory<Department, String>("departmentHead"));
-        
-        departmentTable.setItems(departments);
+        try {
+            ResultSet data = Department.getAllDepartments();
+            
+            ResultSetMetaData rsmd = data.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int i = 0; i < columnCount; i++ ) {
+                final int j = i;
+                String name = rsmd.getColumnName(i + 1);
+                TableColumn col = new TableColumn(name);
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
+                });
+                departmentTable.getColumns().addAll(col);
+            }
+            
+            departmentData = FXCollections.observableArrayList();
+            while(data.next()){
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                System.out.println("column count: " + data.getMetaData().getColumnCount());
+                for(int i=1 ; i<=data.getMetaData().getColumnCount(); i++){
+                    row.add(data.getString(i));   
+                }
+                System.out.println("Row [1] added "+row );
+                departmentData.add(row);
+
+            }
+
+            //FINALLY ADDED TO TableView
+            departmentTable.setItems(departmentData);
+            
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 }

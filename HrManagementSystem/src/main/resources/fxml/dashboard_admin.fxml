@@ -110,11 +110,6 @@
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
-                                 <columns>
-                                    <TableColumn fx:id="departmentId" editable="false" prefWidth="75.0" text="Department Id" />
-                                    <TableColumn fx:id="departmentName" editable="false" prefWidth="75.0" text="Department Name" />
-                                    <TableColumn fx:id="departmentHead" editable="false" prefWidth="75.0" text="Department Head" />
-                                 </columns>
                               </TableView>
                               <Button id="Button" fx:id="addNewDepartmentButton" layoutX="836.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Add New">
                                  <font>
