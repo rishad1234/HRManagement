@@ -98,6 +98,8 @@ public class AdminDashboardController implements Initializable {
     private TableView expensesTable;
     @FXML
     private Button reloadIncome;
+    @FXML
+    private Button reloadExpense;
     
     
     private ObservableList<ObservableList> departmentData;
@@ -244,6 +246,15 @@ public class AdminDashboardController implements Initializable {
                 incomesTable.getItems().clear();
                 incomesTable.getColumns().clear();
                 addIncomeDataToTable();
+            }
+        });
+        
+        reloadExpense.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                expensesTable.getItems().clear();
+                expensesTable.getColumns().clear();
+                addExpenseDataToTable();
             }
         });
         

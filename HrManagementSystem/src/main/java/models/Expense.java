@@ -6,6 +6,7 @@
 package models;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,5 +64,22 @@ public class Expense {
             Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
+    }
+    
+    public static void insertExpense(String title, String description, double amount, Date created, int dept){
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "insert into expenses (department_id, created_at, amount_of_expense, expense_title, expense_description ) " +
+                    "values(?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, dept);
+            statement.setDate(2, created);
+            statement.setDouble(3, amount);
+            statement.setString(4, title);
+            statement.setString(5, description);
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

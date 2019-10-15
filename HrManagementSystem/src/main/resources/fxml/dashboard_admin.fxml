@@ -231,6 +231,11 @@
                               <Font size="20.0" />
                            </font>
                         </Button>
+                        <Button id="Button" fx:id="reloadExpense" layoutX="626.0" layoutY="12.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="189.0" style="-fx-background-radius: 10;" stylesheets="@../styles/Styles.css" text="Reload">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
                      </children>
                   </Pane>
                </content></Tab>

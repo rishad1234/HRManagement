@@ -118,11 +118,11 @@ public class AddNewIncomeController implements Initializable {
         
         String incomeDepartmentData = incomeDepartment.getValue().toString();
         
-            for(int i = 0; i < deptTemp.size(); i++){
-                if(deptTemp.get(i).equals(incomeDepartmentData)){
-                    dept = departmentIdList.get(i);
-                }
+        for(int i = 0; i < deptTemp.size(); i++){
+            if(deptTemp.get(i).equals(incomeDepartmentData)){
+                dept = departmentIdList.get(i);
             }
+        }
         java.sql.Date finishedDate = getDate();
         
         Income.insertIncome(pName, pDescription, cName, dept, Double.valueOf(rev), finishedDate);
