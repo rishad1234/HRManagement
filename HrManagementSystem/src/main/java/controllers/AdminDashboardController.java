@@ -31,10 +31,12 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import models.CustomQuery;
 import models.Department;
 import models.Employee;
 import models.Expense;
@@ -100,6 +102,16 @@ public class AdminDashboardController implements Initializable {
     private Button reloadIncome;
     @FXML
     private Button reloadExpense;
+    @FXML
+    private TextArea queryBox;
+    @FXML
+    private TextArea errorBox;
+    @FXML
+    private TableView resultTable;
+    @FXML
+    private Button runQuery;
+    @FXML
+    private Button clearQuery;
     
     
     private ObservableList<ObservableList> departmentData;
@@ -107,6 +119,7 @@ public class AdminDashboardController implements Initializable {
     private ObservableList<ObservableList> employeeData;
     private ObservableList<ObservableList> incomeData;
     private ObservableList<ObservableList> expenseData;
+    private ObservableList<ObservableList> resultData;
     
     
     @Override
@@ -290,6 +303,29 @@ public class AdminDashboardController implements Initializable {
             }
         });
         /// Expenses Code End here
+        
+        runQuery.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    String sql = queryBox.getText();
+                    ResultSet resultData = CustomQuery.customQeury(sql);
+                    addResultDataToTable(resultData);
+                } catch (SQLException ex) {
+                    errorBox.setText(ex.toString());
+                }
+            }
+        });
+        
+        clearQuery.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                queryBox.setText("");
+                errorBox.setText("");
+                resultTable.getItems().clear();
+                resultTable.getColumns().clear();
+            }
+        });
     }    
     
     public void getIncomeData(){
@@ -509,6 +545,44 @@ public class AdminDashboardController implements Initializable {
             }
 
             expensesTable.setItems(expenseData);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addResultDataToTable(ResultSet data){
+        try {
+            //ResultSet data = Expense.getAllExpenses();
+            
+            ResultSetMetaData rsmd = data.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            for (int i = 0; i < columnCount; i++ ) {
+                final int j = i;
+                String name = rsmd.getColumnName(i + 1);
+                TableColumn col = new TableColumn(name);
+                col.setCellValueFactory(new Callback<CellDataFeatures<ObservableList,String>,ObservableValue<String>>(){                    
+                    public ObservableValue<String> call(CellDataFeatures<ObservableList, String> param) {                                                                                              
+                        return new SimpleStringProperty(param.getValue().get(j).toString());                        
+                    }                    
+                });
+                resultTable.getColumns().addAll(col);
+            }
+            
+            resultData = FXCollections.observableArrayList();
+            while(data.next()){
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                System.out.println("column count: " + data.getMetaData().getColumnCount());
+                for(int i=1 ; i<=data.getMetaData().getColumnCount(); i++){
+                    row.add(data.getString(i));   
+                }
+                System.out.println("Row [1] added "+row );
+                resultData.add(row);
+
+            }
+
+            resultTable.setItems(resultData);
             
         } catch (SQLException ex) {
             Logger.getLogger(AdminDashboardController.class.getName()).log(Level.SEVERE, null, ex);
