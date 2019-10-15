@@ -139,4 +139,19 @@ public class Employee {
         return data;
     }
     
+    public static void updateEmployee(String email, String password, Date birthday, String gender){
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "update employees set date_of_birth = ?, gender = ? where email = ? and password = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setDate(1, birthday);
+            preparedStatement.setString(2, gender);
+            preparedStatement.setString(3, email);
+            preparedStatement.setString(4, password);
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

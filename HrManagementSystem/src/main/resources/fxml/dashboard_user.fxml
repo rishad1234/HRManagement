@@ -34,11 +34,6 @@
                                     <Font name="Arial" size="20.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="74.0" layoutY="320.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="189.0" style="-fx-background-color: #3583b5; -fx-font-size: 22px;" text="Attendance" textFill="#fcf9f9">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Button>
                               <Label alignment="CENTER" layoutX="79.0" layoutY="49.0" prefHeight="39.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-radius: 5px;" text="Employee Name">
                                  <font>
                                     <Font size="22.0" />
@@ -164,13 +159,13 @@
                                     <Font name="Arial" size="20.0" />
                                  </font>
                               </Label>
-                              <DatePicker layoutX="202.0" layoutY="163.0" prefHeight="45.0" prefWidth="214.0" />
-                              <Button layoutX="38.0" layoutY="253.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" style="-fx-background-color: #82b3c9;" text="Submit">
+                              <DatePicker fx:id="editBirthday" layoutX="202.0" layoutY="163.0" prefHeight="45.0" prefWidth="214.0" />
+                              <Button fx:id="submit" layoutX="38.0" layoutY="253.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" style="-fx-background-color: #82b3c9;" text="Submit">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
                               </Button>
-                              <ChoiceBox layoutX="203.0" layoutY="71.0" prefHeight="49.0" prefWidth="216.0" />
+                              <ChoiceBox fx:id="editGender" layoutX="203.0" layoutY="71.0" prefHeight="49.0" prefWidth="216.0" />
                            </children>
                         </Pane>
                         <Label fx:id="editDesignation" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="236.0" prefHeight="48.0" prefWidth="263.0" text="Senior Software Engineer" textAlignment="CENTER" textFill="#281919">

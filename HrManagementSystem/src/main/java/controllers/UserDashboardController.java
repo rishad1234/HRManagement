@@ -8,11 +8,23 @@ package controllers;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import models.Employee;
 
@@ -46,12 +58,50 @@ public class UserDashboardController implements Initializable {
     private Label editName;
     @FXML
     private Label editDesignation;
+    @FXML
+    private ChoiceBox editGender;
+    @FXML
+    private DatePicker editBirthday;
+    @FXML
+    private Button submit;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        setUi();
+        
+        submit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                java.sql.Date birthday = getDate();
+                String g = editGender.getValue().toString();
+                
+                Employee.updateEmployee(Employee.EmployeeEmail, Employee.EmployeePassword, birthday, g);
+                setUi();
+            }
+        });
+    }    
+    
+    private java.sql.Date getDate(){
+        java.sql.Date sql = null;
         try {
-            System.out.println(Employee.EmployeeEmail);
-            System.out.println(Employee.EmployeePassword);
+            LocalDate localDate = editBirthday.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            Date date = Date.from(instant);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String joining = format.format(date);
+            Date parsed = format.parse(joining);
+            sql = new java.sql.Date(parsed.getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(AddNewEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sql;
+    }
+    
+    public void setUi(){
+        editGender.setItems(FXCollections.observableArrayList("M", "F"));
+        editGender.getSelectionModel().selectFirst();
+        try {
             
             ResultSet data = Employee.getEmployee();
             System.out.println(data);
@@ -74,6 +124,6 @@ public class UserDashboardController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(UserDashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
     
 }
