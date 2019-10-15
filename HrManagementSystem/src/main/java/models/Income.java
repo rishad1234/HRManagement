@@ -6,6 +6,7 @@
 package models;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,6 +65,24 @@ public class Income {
             Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
         }
         return data;
+    }
+    
+    public static void insertIncome(String name, String description, String client, int dept, double revenue, Date finishedDate){
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "insert into incomes (department_id, client_name, project_name, project_description, finished_date, income_amount) " +
+                    "values(?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, dept);
+            statement.setString(2, client);
+            statement.setString(3, name);
+            statement.setString(4, description);
+            statement.setDate(5, finishedDate);
+            statement.setDouble(6, revenue);
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

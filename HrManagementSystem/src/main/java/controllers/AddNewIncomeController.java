@@ -9,7 +9,12 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,10 +26,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.Department;
 import models.Employee;
+import models.Income;
 import utils.AttributeHash;
 import utils.CleanStringAttribute;
 
@@ -42,17 +50,17 @@ public class AddNewIncomeController implements Initializable {
     @FXML
     private TextField projectName;
     @FXML
-    private TextField projectDesccription;
+    private TextArea projectDescription;
     @FXML
-    private TextField clintName;
+    private TextField clientName;
     @FXML
     private TextField revenue;
     @FXML
-    private ChoiceBox department;
+    private ChoiceBox incomeDepartment;
     @FXML
-    private ChoiceBox finishedDate;
+    private DatePicker finished;
     @FXML
-    private Button addNewIncome;
+    private Button addIncome;
     
     
     private ArrayList<Integer> departmentIdList = new ArrayList<>();
@@ -71,7 +79,7 @@ public class AddNewIncomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         setDepartmentValues();
-        addNewIncome.setOnAction(new EventHandler<ActionEvent>() {
+        addIncome.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 try {
@@ -94,26 +102,49 @@ public class AddNewIncomeController implements Initializable {
                 System.out.println(data.getString("department_name"));
                 System.out.println(data.getInt("department_id"));
             }
-            department.setItems(departmentNameList);
-            department.getSelectionModel().selectFirst();
+            incomeDepartment.setItems(departmentNameList);
+            incomeDepartment.getSelectionModel().selectFirst();
             dept = 1;
         } catch (SQLException ex) {
             Logger.getLogger(AddNewEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    
-    
-    
-    
     public void addIncome() throws ParseException{
         pName = CleanStringAttribute.clean(projectName.getText());
-        pDescription = CleanStringAttribute.clean(projectDesccription.getText());
-        cName = CleanStringAttribute.clean(clintName.getText());
+        pDescription = CleanStringAttribute.clean(projectDescription.getText());
+        cName = CleanStringAttribute.clean(clientName.getText());
         rev = CleanStringAttribute.clean(revenue.getText());
         
+        String incomeDepartmentData = incomeDepartment.getValue().toString();
         
+            for(int i = 0; i < deptTemp.size(); i++){
+                if(deptTemp.get(i).equals(incomeDepartmentData)){
+                    dept = departmentIdList.get(i);
+                }
+            }
+        java.sql.Date finishedDate = getDate();
         
+        Income.insertIncome(pName, pDescription, cName, dept, Double.valueOf(rev), finishedDate);
+        Stage stage = (Stage) addIncome.getScene().getWindow();
+        stage.close();
+        
+    }
+    
+    private java.sql.Date getDate(){
+        java.sql.Date sql = null;
+        try {
+            LocalDate localDate = finished.getValue();
+            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            Date date = Date.from(instant);
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String joining = format.format(date);
+            Date parsed = format.parse(joining);
+            sql = new java.sql.Date(parsed.getTime());
+        } catch (ParseException ex) {
+            Logger.getLogger(AddNewEmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sql;
     }
     
 }
