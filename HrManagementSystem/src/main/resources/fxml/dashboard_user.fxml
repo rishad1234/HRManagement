@@ -2,11 +2,11 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -24,12 +24,12 @@
                      <children>
                         <Pane layoutX="1.0" layoutY="-3.0" prefHeight="568.0" prefWidth="336.0" style="-fx-background-color: white;">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="104.0" prefHeight="48.0" prefWidth="209.0" text="Rishadul Islam Khan" textAlignment="CENTER" textFill="#281919">
+                              <Label fx:id="employeeName" alignment="CENTER" contentDisplay="CENTER" layoutX="64.0" layoutY="104.0" prefHeight="48.0" prefWidth="209.0" text="Rishadul Islam Khan" textAlignment="CENTER" textFill="#281919">
                                  <font>
                                     <Font name="Arial" size="20.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="226.0" prefHeight="48.0" prefWidth="263.0" text="Senior Software Engineer" textAlignment="CENTER" textFill="#281919">
+                              <Label fx:id="designation" alignment="CENTER" contentDisplay="CENTER" layoutX="37.0" layoutY="226.0" prefHeight="48.0" prefWidth="263.0" text="Senior Software Engineer" textAlignment="CENTER" textFill="#281919">
                                  <font>
                                     <Font name="Arial" size="20.0" />
                                  </font>
@@ -39,7 +39,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Button>
-                              <Label alignment="CENTER" layoutX="83.0" layoutY="49.0" prefHeight="39.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-radius: 5px;" text="Employee Name">
+                              <Label alignment="CENTER" layoutX="79.0" layoutY="49.0" prefHeight="39.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-radius: 5px;" text="Employee Name">
                                  <font>
                                     <Font size="22.0" />
                                  </font>
@@ -63,7 +63,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="225.0" layoutY="84.0" prefHeight="39.0" prefWidth="264.0" text="rishad@gmail.com">
+                              <Label fx:id="email" alignment="CENTER" layoutX="225.0" layoutY="84.0" prefHeight="39.0" prefWidth="264.0" text="rishad@gmail.com">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -73,7 +73,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="225.0" layoutY="123.0" prefHeight="39.0" prefWidth="264.0" text="01715369875">
+                              <Label fx:id="phone" alignment="CENTER" layoutX="225.0" layoutY="123.0" prefHeight="39.0" prefWidth="264.0" text="01715369875">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -88,7 +88,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="30.0" layoutY="310.0" prefHeight="39.0" prefWidth="143.0" text="Department">
+                              <Label layoutX="30.0" layoutY="310.0" prefHeight="39.0" prefWidth="143.0" text="Department:">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -98,27 +98,27 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="225.0" layoutY="271.0" prefHeight="39.0" prefWidth="264.0" text="8th July, 1998">
+                              <Label fx:id="birthday" alignment="CENTER" layoutX="225.0" layoutY="271.0" prefHeight="39.0" prefWidth="264.0" text="8th July, 1998">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="225.0" layoutY="310.0" prefHeight="39.0" prefWidth="264.0" text="Web Development">
+                              <Label fx:id="department" alignment="CENTER" layoutX="225.0" layoutY="310.0" prefHeight="39.0" prefWidth="264.0" text="Web Development">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="225.0" layoutY="349.0" prefHeight="39.0" prefWidth="264.0" text="10,000 BDT">
+                              <Label fx:id="salary" alignment="CENTER" layoutX="225.0" layoutY="349.0" prefHeight="39.0" prefWidth="264.0" text="10,000 BDT">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="30.0" layoutY="388.0" prefHeight="39.0" prefWidth="83.0" text="Gender">
+                              <Label layoutX="30.0" layoutY="388.0" prefHeight="39.0" prefWidth="83.0" text="Gender:">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="225.0" layoutY="388.0" prefHeight="39.0" prefWidth="264.0" text="Male">
+                              <Label fx:id="gender" alignment="CENTER" layoutX="225.0" layoutY="388.0" prefHeight="39.0" prefWidth="264.0" text="Male">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -135,17 +135,17 @@
                      <children>
                         <Pane layoutX="1.0" layoutY="-5.0" prefHeight="571.0" prefWidth="321.0" style="-fx-background-color: #b3e5fc;">
                            <children>
-                              <Label alignment="CENTER" layoutX="90.0" layoutY="44.0" prefHeight="39.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-radius: 5px;" text="Employee Name">
+                              <Label alignment="CENTER" layoutX="79.0" layoutY="51.0" prefHeight="39.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-radius: 5px;" text="Employee Name">
                                  <font>
                                     <Font size="22.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="109.0" prefHeight="48.0" prefWidth="209.0" text="Rishadul Islam Khan" textAlignment="CENTER" textFill="#281919">
+                              <Label fx:id="editName" alignment="CENTER" contentDisplay="CENTER" layoutX="56.0" layoutY="107.0" prefHeight="48.0" prefWidth="209.0" text="Rishadul Islam Khan" textAlignment="CENTER" textFill="#281919">
                                  <font>
                                     <Font name="Arial" size="20.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="83.0" layoutY="182.0" prefHeight="39.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-radius: 5px;" text="Designation">
+                              <Label alignment="CENTER" layoutX="79.0" layoutY="182.0" prefHeight="39.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-radius: 5px;" text="Designation">
                                  <font>
                                     <Font size="22.0" />
                                  </font>
@@ -154,32 +154,26 @@
                         </Pane>
                         <Pane layoutX="319.0" prefHeight="566.0" prefWidth="681.0">
                            <children>
-                              <TextField layoutX="202.0" layoutY="61.0" prefHeight="55.0" prefWidth="214.0" />
                               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="66.0" prefHeight="48.0" prefWidth="169.0" text="Gender:" textAlignment="CENTER" textFill="#281919">
                                  <font>
                                     <Font name="Arial" size="20.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="168.0" prefHeight="48.0" prefWidth="169.0" text="Phone Number:" textAlignment="CENTER" textFill="#281919">
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="162.0" prefHeight="48.0" prefWidth="169.0" text="Date of Birth:" textAlignment="CENTER" textFill="#281919">
                                  <font>
                                     <Font name="Arial" size="20.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="202.0" layoutY="165.0" prefHeight="55.0" prefWidth="214.0" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="269.0" prefHeight="48.0" prefWidth="169.0" text="Date of Birth:" textAlignment="CENTER" textFill="#281919">
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </Label>
-                              <DatePicker layoutX="202.0" layoutY="268.0" prefHeight="45.0" prefWidth="214.0" />
-                              <Button layoutX="38.0" layoutY="362.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" style="-fx-background-color: #82b3c9;" text="Submit">
+                              <DatePicker layoutX="202.0" layoutY="163.0" prefHeight="45.0" prefWidth="214.0" />
+                              <Button layoutX="38.0" layoutY="253.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="117.0" style="-fx-background-color: #82b3c9;" text="Submit">
                                  <font>
                                     <Font size="21.0" />
                                  </font>
                               </Button>
+                              <ChoiceBox layoutX="203.0" layoutY="71.0" prefHeight="49.0" prefWidth="216.0" />
                            </children>
                         </Pane>
-                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="236.0" prefHeight="48.0" prefWidth="263.0" text="Senior Software Engineer" textAlignment="CENTER" textFill="#281919">
+                        <Label fx:id="editDesignation" alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="236.0" prefHeight="48.0" prefWidth="263.0" text="Senior Software Engineer" textAlignment="CENTER" textFill="#281919">
                            <font>
                               <Font name="Arial" size="20.0" />
                            </font>

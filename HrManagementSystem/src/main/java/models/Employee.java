@@ -19,6 +19,9 @@ import utils.ConnectDB;
  * @author Rishad
  */
 public class Employee {
+    public static String EmployeeEmail;
+    public static String EmployeePassword;
+    
     public static int countEmployees(){
         ResultSet data = null;
         int numberOfEmployees = 0;
@@ -116,6 +119,24 @@ public class Employee {
         } catch (SQLException ex) {
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public static ResultSet getEmployee(){
+        ResultSet data = null;
+        try {
+            Connection connection = ConnectDB.makeConnection();
+            String sql = "select employees.employee_id, departments.department_name, employees.password, employees.phone, " + 
+                    "payrolls.salary, employees.first_name, employees.last_name, employees.email, employees.date_of_birth, employees.designation, employees.gender " +
+                    "from employees inner join departments " +
+                    "on employees.department_id = departments.department_id inner join " +
+                    "payrolls on employees.payroll_id = payrolls.payroll_id";
+            
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            data = preparedStatement.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(Income.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return data;
     }
     
 }

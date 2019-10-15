@@ -20,6 +20,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import models.Employee;
 import utils.AttributeHash;
 import utils.CleanStringAttribute;
 import utils.ConnectDB;
@@ -85,6 +86,8 @@ public class LoginController implements Initializable {
                         gotoAdminPanel();
                         break;
                     }else{
+                        Employee.EmployeeEmail = data.getString("email");
+                        Employee.EmployeePassword = data.getString("password");
                         gotoEmployeePanel();
                         break;
                     }
@@ -106,12 +109,12 @@ public class LoginController implements Initializable {
     }
     
     public void gotoEmployeePanel() throws IOException {
-       Stage stage = ((Stage) email.getScene().getWindow());
-       stage.setTitle("Dashboard");
-       Pane myPane = null;
-       myPane = FXMLLoader.load(getClass().getResource("/fxml/dashboard_user.fxml"));
-       Scene scene = new Scene(myPane);
-       stage.setScene(scene);    
-       stage.show();
+        Stage stage = ((Stage) email.getScene().getWindow());
+        stage.setTitle("Dashboard");
+        Pane myPane = null;
+        myPane = FXMLLoader.load(getClass().getResource("/fxml/dashboard_user.fxml"));
+        Scene scene = new Scene(myPane);
+        stage.setScene(scene);    
+        stage.show();
     }
 }
